@@ -3,7 +3,7 @@ name: Demo Workflow   # Workflow name
 on: 
  pull_request:            # Trigger (runs on push)
   branches: 
-  - main 
+  - dev1 
 
 jobs:
   build:              # Job name
