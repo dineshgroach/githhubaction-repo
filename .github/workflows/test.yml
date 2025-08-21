@@ -1,12 +1,21 @@
-name: Demo Workflow   # Workflow name
-
-on: push
+name: Inputs and Outputs Lab
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: "Enter your name"
+        required: true
+        default: "Guest"
 
 jobs:
-  build:              # Job name
-    runs-on: self-hosted
-    
-
+  greet:
+    runs-on: ubuntu-latest
+    outputs:
+      final_greeting: ${{ steps.step1.outputs.greet_msg }}
     steps:
-      - uses: actions/checkout@v3   # Step 1: Checkout code
-      - run: sudo mkdir /home/temp-folder
+      - name: Save Greeting
+        id: step1
+        run: echo "greet_msg=Hello ${{ github.event.inputs.username }}" >> $GITHUB_OUTPUT
+
+      - name: Use Greeting in same job
+        run: echo "Final message in this job ${{steps.step1.outputs.greet_msg}}"
