@@ -9,4 +9,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3   # Step 1: Checkout code
-      - run: echo "Hello, GitHub Actions!"  # Step 2: Run command
+      - run: sudo mkdir /home/temp-folder
